@@ -1,0 +1,91 @@
+let step = 1;
+let choice = "";
+let place = "";
+
+// Ensure your elements exist in HTML: q, yesBtn, noBtn
+yesBtn.onclick = () => {
+    if(step == 1){
+        q.innerText = "Will you be my partner in this beautiful journey called life? ❤️🥹";
+        step++;
+    }
+    else if(step == 2){
+        q.innerText = "Can I be the reason behind your smile every day? 😊❤️";
+        step++;
+    }
+    else if(step == 3){
+        q.innerText = "Will you go on our first date with me? 🌹";
+        step++;
+    }
+    else if(step == 4){
+        q.innerText = "What would you like for our first date? ❤️";
+
+        // Create container for date choices
+        let optionsDiv = document.createElement("div");
+        optionsDiv.id = "options-container";
+        optionsDiv.style.marginTop = "20px";
+        optionsDiv.innerHTML = `
+            <button onclick="step3('☕ Coffee')" style="margin: 5px; padding: 10px 20px;">☕ Coffee</button>
+            <button onclick="step3('🍕 Dinner')" style="margin: 5px; padding: 10px 20px;">🍕 Dinner</button>
+            <button onclick="step3('🍦 Ice Cream')" style="margin: 5px; padding: 10px 20px;">🍦 Ice Cream</button>
+        `;
+        document.body.appendChild(optionsDiv);
+
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+    }
+};
+
+function step3(selected){
+    choice = selected;
+
+    q.innerText = "Where should we make our first beautiful memory together? ✨❤️";
+
+    // Remove old food/drink choices first
+    let oldContainer = document.getElementById("options-container");
+    if(oldContainer) oldContainer.remove();
+
+    // Create container for location choices
+    let placeDiv = document.createElement("div");
+    placeDiv.style.marginTop = "20px";
+    placeDiv.innerHTML = `
+        <button onclick="final('☕ Cozy Cafe')" style="margin: 5px; padding: 10px 20px;">☕ Cozy Cafe</button>
+        <button onclick="final('🌳 Beautiful Park')" style="margin: 5px; padding: 10px 20px;">🌳 Beautiful Park</button>
+        <button onclick="final('🏖️ Beach')" style="margin: 5px; padding: 10px 20px;">🏖️ Beach</button>
+    `;
+    document.body.appendChild(placeDiv);
+}
+
+function final(selectedPlace){
+    place = selectedPlace;
+
+    document.body.innerHTML = `
+    <div style="
+        max-width:700px;
+        margin:auto;
+        margin-top:60px;
+        padding:40px;
+        background:white;
+        border-radius:25px;
+        box-shadow:0 0 30px rgba(255,0,120,.3);
+        text-align:center;
+        font-family:Poppins,sans-serif;
+    ">
+    <h1 style="font-size:55px;color:#ff2d75;">❤️ Thank You ❤️</h1>
+    <h2>You just made me the happiest person alive. 🥹</h2>
+    <p style="font-size:22px;line-height:1.8;">
+    Our first date is officially planned! 💕
+    <br><br>
+    <b>${choice}</b><br>
+    📍 ${place}
+    <br><br>
+    I promise to respect you, care for you, support you,
+    and make countless beautiful memories together. 🌹
+    <br><br>
+    Thank you for saying <span style="color:#ff2d75;">YES</span>. ❤️
+    </p>
+    <h2>Can't wait to see you... 🥰</h2>
+    <div style="font-size:45px;">
+    ❤️ 🌹 💕 ✨ 🥰 💖
+    </div>
+    </div>`;
+}
